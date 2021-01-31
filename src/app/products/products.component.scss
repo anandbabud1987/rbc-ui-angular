@@ -1,0 +1,35 @@
+.productDiv {
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+  padding: 20px;
+
+}
+.card:active{
+  background: green;
+}
+
+.card:focus{
+  background: blue;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+
+.cartBtn{
+  color: white;
+  background: green;
+  border-radius: 5px;
+  cursor: pointer;
+}

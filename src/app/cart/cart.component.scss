@@ -1,0 +1,22 @@
+.cartHeader{
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+}
+.checkoutBtn{
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: end;
+  margin-left: 90%;
+  color: white;
+  background: green;
+}
+.delBtn{
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: end;
+  color: white;
+  background: green;
+}

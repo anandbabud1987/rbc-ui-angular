@@ -1,0 +1,25 @@
+<div class="productDiv">
+ <h6>Products</h6>
+  <div *ngFor="let product of products" class="productDiv">
+    <div>
+      <div class="card">
+        <form name="cartFarm">
+          <h3 >{{product.name}}</h3>
+          <h3>{{product.price | currency}}</h3>
+          <img  width="200px" height="200px" *ngIf="product.name==='Oranges'" src="../../assets/orange.png" />
+          <img width="200px" height="200px" *ngIf="product.name==='Pomegranates'" src="../../assets/pomegran.jpg" />
+          <div class="container">
+          <input type="number" min="0" value="{{product.quantity}}" >
+
+            &nbsp;&nbsp;
+            <button class="cartBtn" (click)=minus(product)>-</button>&nbsp;&nbsp;
+            <button class="cartBtn" (click)=plus(product)>+</button>&nbsp;&nbsp;
+            <button class="cartBtn" [hidden]="product.quantity<=0" (click)=addToCart()>Add to Cart</button>&nbsp;&nbsp;
+          </div>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+</div>

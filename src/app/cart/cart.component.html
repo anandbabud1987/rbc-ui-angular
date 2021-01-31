@@ -1,0 +1,46 @@
+<div class="productDiv">
+  <div class="cartHeader">
+    <div>
+      <h3>Shopping cart</h3>
+
+    </div>
+
+  </div>
+
+  <h6 *ngIf="!items || items.length===0">Your cart is empty. add something to buy</h6>
+  <table datatable class="row-border hover">
+    <thead>
+    <tr>
+      <th></th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Total price</th>
+    </tr>
+    </thead>
+    <tr *ngFor="let item of items">
+      <td >
+          <img width="200px" height="200px" *ngIf="item.name==='Oranges'" src="../../assets/orange.png"/>
+          <img width="200px" height="200px" *ngIf="item.name==='Pomegranates'" src="../../assets/pomegran.jpg"/>
+          {{item.name}}
+      </td>
+
+        <td>
+          <h3>${{item.price}}</h3>
+        </td>
+        <td>
+          <input type="number" min="1" value={{item.quantity}} (change)="changeQuantity($event,item)">
+        </td>
+      <td>
+        {{item.price * item.quantity}}
+      </td>
+      <td>
+        <button class="delBtn" (click)="deleteItem(item)">Delete</button>
+      </td>
+
+    </tr>
+  </table>
+
+  <button class="checkoutBtn" (click)="checkout()" *ngIf="items.length>0">Checkout</button>
+
+
+</div>
