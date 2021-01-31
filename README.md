@@ -1,6 +1,7 @@
 # RbcTestUi
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.2.
+Run npm install
+Run npm start
 
 ## Development server
 
