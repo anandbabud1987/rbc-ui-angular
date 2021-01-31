@@ -20,7 +20,7 @@ export class ApiService {
   getAllOrders(): Observable<any> {
     return this.http.get<any>(this.URL + '/orders');
   }
-  async checkout(data: Item[]): Promise<Observable<any>>  {
+  checkout(data: Item[]): Observable<any>  {
     return this.http.post<any>(this.URL + '/orders', data);
   }
 

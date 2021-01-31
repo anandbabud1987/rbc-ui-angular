@@ -26,7 +26,7 @@ export class CartComponent implements OnInit {
     this.cartService.updateQuanity(this.items.length);
   }
 
-  checkout(): void {
+  async checkout(): Promise<void> {
     const currentDate = new Date().toString();
     this.items.forEach(value => {
       this.checkedItem.checkoutDate = currentDate;
@@ -36,11 +36,9 @@ export class CartComponent implements OnInit {
       this.checkedItem.totalPrice = (value.quantity * value.price);
       this.checkedItems.push(this.checkedItem);
     });
-    this.apiService.checkout(this.checkedItems).then(data => {
-      data.subscribe(value => {
-        alert(value);
-      });
+    await this.apiService.checkout(this.checkedItems).subscribe(data => {
     });
+    alert('Checkout completed');
   }
 
   changeQuantity(value: any, item: Item): void {
@@ -53,5 +51,6 @@ export class CartComponent implements OnInit {
 
   deleteItem(item: Item): void {
     this.items = this.items.filter(value => value.name !== item.name);
+    this.cartService.updateQuanity(this.items.length);
   }
 }
