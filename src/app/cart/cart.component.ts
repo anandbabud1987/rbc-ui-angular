@@ -12,44 +12,46 @@ import {CheckOutItems} from '../check-out-items';
 export class CartComponent implements OnInit {
 
   items: Item[] = [];
-  checkeditems: CheckOutItems[] = [];
-  checkeditem: CheckOutItems={name: '', price: 0, quantity: 0,checkoutDate:new Date().toString(),totalPrice:0};
-  item: Item = {name: '', price: 0, quantity: 0};
+  checkedItems: CheckOutItems[] = [];
+  checkedItem: CheckOutItems = {name: '', price: 0, quantity: 0, checkoutDate: new Date().toString(), totalPrice: 0};
 
 
-  constructor(private cartService: AddCartService,private apiService:ApiService) {
+  constructor(private cartService: AddCartService, private apiService: ApiService) {
   }
 
   ngOnInit(): void {
     this.cartService.cartItems.subscribe(value => {
       this.items = value;
     });
-
-    this.cartService.updateQuanity(this.checkeditems);
+    this.cartService.updateQuanity(this.items.length);
   }
 
   checkout(): void {
-    const currentDate=new Date().toString();
+    const currentDate = new Date().toString();
     this.items.forEach(value => {
-      this.checkeditem.checkoutDate=currentDate;
-      this.checkeditem.name=value.name;
-      this.checkeditem.price=value.price;
-      this.checkeditem.quantity=value.quantity;
-      this.checkeditem.totalPrice=(value.quantity*value.price);
-      this.checkeditems.push(this.checkeditem);
+      this.checkedItem.checkoutDate = currentDate;
+      this.checkedItem.name = value.name;
+      this.checkedItem.price = value.price;
+      this.checkedItem.quantity = value.quantity;
+      this.checkedItem.totalPrice = (value.quantity * value.price);
+      this.checkedItems.push(this.checkedItem);
     });
-    this.apiService.checkout(this.checkeditems);
+    this.apiService.checkout(this.checkedItems).then(data => {
+      data.subscribe(value => {
+        alert(value);
+      });
+    });
   }
 
   changeQuantity(value: any, item: Item): void {
     this.items.forEach((value1, index) => {
-      value1.price=item.price;
-      value1.quantity=value.target.value;
+      value1.price = item.price;
+      value1.quantity = value.target.value;
     });
 
   }
 
-  deleteItem(item: Item) {
-    this.items=this.items.filter(value => value.name!==item.name);
+  deleteItem(item: Item): void {
+    this.items = this.items.filter(value => value.name !== item.name);
   }
 }

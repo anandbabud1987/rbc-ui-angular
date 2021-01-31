@@ -1,15 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Item} from './item';
 import {BehaviorSubject} from 'rxjs';
-import {CheckOutItems} from './check-out-items';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AddCartService {
-  item:Item={name:'',price:0,quantity:0};
+  item: Item = {name: '', price: 0, quantity: 0};
   cartItems = new BehaviorSubject<Item[]>([]);
-  quantity = new BehaviorSubject<CheckOutItems[]>([]);
+  quantity = new BehaviorSubject<number>(0);
   cartItem = this.cartItems.asObservable();
   quantityData = this.quantity.asObservable();
 
@@ -19,7 +18,12 @@ export class AddCartService {
   updateCartItems(updatedCart: Item[]) {
     this.cartItems.next(updatedCart);
   }
-  updateQuanity(items:CheckOutItems[]){
+
+  updateQuanity(items: number) {
     this.quantity.next(items);
+  }
+
+  removeDups(inputs: Item[]): Item[] {
+    return Array.from(new Set(inputs));
   }
 }

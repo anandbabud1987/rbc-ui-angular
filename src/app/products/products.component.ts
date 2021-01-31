@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit {
 
   items: Item[] = [];
 
-  constructor(private apiService: ApiService,private cartService:AddCartService) {
+  constructor(private apiService: ApiService, private cartService: AddCartService) {
   }
 
   getAllProducts(): void {
@@ -32,19 +32,8 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProducts();
-    this.cartService.quantity.subscribe(value => {
-      value.forEach(value1 => {
-        this.items.forEach(value2 => {
-          if(value2.name===value1.name){
-            value2.quantity=value1.quantity;
-          }
-        })
-      });
-    })
 
   }
-
-  // tslint:disable-next-line:typedef use-lifecycle-interface
 
 
   plus(product: Product): void {
@@ -55,7 +44,6 @@ export class ProductsComponent implements OnInit {
       quantity: product.quantity,
     };
     this.item = item;
-    console.log(this.item);
   }
 
   minus(product: Product) {
@@ -63,20 +51,18 @@ export class ProductsComponent implements OnInit {
       return;
     }
     product.quantity--;
-
     let item: Item = {
       name: product.name,
       price: product.price,
       quantity: product.quantity,
     };
     this.item = item;
-    console.log(this.item);
   }
 
-  addToCart() {
+  addToCart(): void {
     this.items.push(this.item);
-
-    console.log(this.items);
-    this.cartService.updateCartItems(this.items);
+    const finalItems = Array.from(new Set(this.items));
+    this.cartService.updateCartItems(finalItems);
+    this.cartService.updateQuanity(finalItems.length);
   }
 }

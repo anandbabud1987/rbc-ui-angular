@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../api.service';
-import {CheckOutItems} from '../check-out-items';
 
 @Component({
   selector: 'app-orders',
@@ -9,16 +8,20 @@ import {CheckOutItems} from '../check-out-items';
 })
 export class OrdersComponent implements OnInit {
 
-  orders:any=[];
-  checkeditem: CheckOutItems={name: '', price: 0, quantity: 0,checkoutDate:new Date().toString(),totalPrice:0};
-  constructor(private apiService:ApiService) { }
+  orders: any = [];
+
+  constructor(private apiService: ApiService) {
+  }
 
   ngOnInit(): void {
     this.apiService.getAllOrders().subscribe(data => {
       this.orders = data;
-
-      });
+    });
   }
 
 
+  getObject(order: any): any[] {
+    const arrayObj = JSON.parse(order);
+    return arrayObj;
+  }
 }

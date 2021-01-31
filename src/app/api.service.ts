@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
+import {Observable, of, Subscription} from 'rxjs';
 import {Product} from './product';
 import {Item} from './item';
 
@@ -14,16 +14,14 @@ export class ApiService {
   }
 
 
-  getAllProducts(){
+  getAllProducts(): Observable<Product[]>{
     return this.http.get<Product[]>(this.URL + '/products');
   }
-  getAllOrders() {
+  getAllOrders(): Observable<any> {
     return this.http.get<any>(this.URL + '/orders');
   }
-  checkout(data: Item[]){
-    this.http.post<String>(this.URL + '/orders',data).subscribe(data=>{
-      return data;
-    });
+  async checkout(data: Item[]): Promise<Observable<any>>  {
+    return this.http.post<any>(this.URL + '/orders', data);
   }
 
 

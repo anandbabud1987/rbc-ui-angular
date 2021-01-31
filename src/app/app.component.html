@@ -9,7 +9,7 @@
   <div class="mainDiv2">
     <div *ngFor="let button of rightNavbuttons">
       <div>
-        <button routerLink={{button.path}} class="navBtns">{{button.label}}<span *ngIf="button.label==='Cart'">{{addedCarts}}</span></button>
+        <button routerLink={{button.path}} class="navBtns">{{button.label}}<span *ngIf="button.label==='Cart' && addedCarts>0">   {{addedCarts}} added</span></button>
       </div>
     </div>
   </div>

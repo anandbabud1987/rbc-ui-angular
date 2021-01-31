@@ -15,6 +15,8 @@ export class AppComponent {
   constructor(private addCartService:AddCartService) {
   }
   ngOnInit():void{
-
+    this.addCartService.quantity.subscribe(value => {
+      this.addedCarts=value;
+    });
   }
 }

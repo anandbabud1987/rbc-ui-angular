@@ -1,9 +1,30 @@
 <div class="productDiv">
-  <h6>Products</h6>
+  <h6>Orders</h6>
   <div *ngFor="let order of orders" class="productDiv">
     <div>
       <div class="card">
-      {{order}}
+
+        <table >
+          <thead>
+          <th></th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total price</th>
+          <th>Checkedout Date</th>
+          </thead>
+          <tr *ngFor="let object of getObject(order)">
+
+            <td>  <img  width="200px" height="200px" *ngIf="object.name==='Oranges'" src="../../assets/orange.png" />
+              <img width="200px" height="200px" *ngIf="object.name==='Pomegranates'" src="../../assets/pomegran.jpg" />
+              {{object.name}}</td>
+            <td> {{object.price}}</td>
+            <td> {{object.quantity}}</td>
+            <td>  {{object.totalPrice}}</td>
+            <td> {{object.checkoutDate}}</td>
+          </tr>
+
+        </table>
+
 
       </div>
     </div>
