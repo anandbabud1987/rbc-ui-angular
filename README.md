@@ -1,7 +1,7 @@
 # RbcTestUi
 
-Run npm install
-Run npm start
+Run `npm install`
+AND `npm start`
 
 ## Development server
 
